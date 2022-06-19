@@ -47,7 +47,6 @@ class GamesController extends Controller
             'category' => $request->category,
             'year' => $request->year,
             'price' => $request->price,
-
         ];
 
         game::where('id', $id)->update($data);
