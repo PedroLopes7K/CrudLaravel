@@ -26,4 +26,31 @@ class GamesController extends Controller
         game::create($request->all());
         return redirect()->route('games-index');
     }
+
+    public function edit($id)
+    {
+        $game = game::where('id', $id)->first();
+        if (!empty($game)) {
+            // dd($game);
+            return view('games.edit', ['game' => $game]);
+        } else {
+            return redirect()->route('games-index');
+        }
+    }
+
+    public function update(Request $request, $id)
+    {
+
+        // dd($request);
+        $data = [
+            'name' => $request->name,
+            'category' => $request->category,
+            'year' => $request->year,
+            'price' => $request->price,
+
+        ];
+
+        game::where('id', $id)->update($data);
+        return redirect()->route('games-index');
+    }
 }
