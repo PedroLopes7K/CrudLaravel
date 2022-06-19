@@ -14,11 +14,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+// criando um grupo de rotas com o mesmo prefixo (games)
+Route::prefix('Games')->group(function () {
+    Route::get('/', [GamesController::class, 'index'])->name('games-index');
+    Route::get('/create', [GamesController::class, 'create'])->name('games-create');
+    Route::post('/', [GamesController::class, 'store'])->name('games-store');
 });
-// Route::get('/testando', function () {
-//     return view('teste');
-// });
 
-Route::get('/Games', [GamesController::class, 'index']);
+// funcao fallback é chamado quando ocorre um erro de  rota
+Route::fallback(function () {
+    return "Error 404!";
+});
