@@ -23,6 +23,7 @@ Route::prefix('Games')->group(function () {
     Route::post('/', [GamesController::class, 'store'])->name('games-store');
     Route::get('/{id}/edit', [GamesController::class, 'edit'])->where('id', '[0-9]+')->name('games-edit');
     Route::put('/{id}', [GamesController::class, 'update'])->where('id', '[0-9]+')->name('games-update');
+    Route::get('/{id}/delete', [GamesController::class, 'destroy'])->where('id', '[0-9]+')->name('games-destroy');
 });
 
 // funcao fallback é chamado quando ocorre um erro de  rota
